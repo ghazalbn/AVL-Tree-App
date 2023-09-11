@@ -1,0 +1,43 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">AVL Tree</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <div class="container">
+        <div class="row justify-content-center">
+            <ul class="nav flex-column">
+                <li class="nav-item px-3" style="margin-right:-40px;">
+                    <AllWords/>
+                </li>
+                <li class="nav-item px-3" style="margin-right:-40px;">
+                    <ShowInRange />
+                </li>
+                <li class="nav-item px-3" style="margin-right:-40px;">
+                    <Search />
+                </li>
+                <li class="nav-item px-3" style="margin-right:-40px;">
+                    <Delete />
+                </li>
+                <li class="nav-item px-3" style="margin-right:-40px;">
+                    <Add />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@code {
+    @* [Parameter]
+    public AVLtree aVLtree {get; set;} *@
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

@@ -1,0 +1,6 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/BlazorInputFile" Path="C:\Users\asus\.nuget\packages\blazorinputfile\0.1.0-preview\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Radzen.Blazor" Path="C:\Users\asus\.nuget\packages\radzen.blazor\3.0.3\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="D:\uni\Ashrafi\P2\MyProject\bin\Debug\netstandard2.1\wwwroot\" />
+  <ContentRoot BasePath="/" Path="D:\uni\Ashrafi\P2\MyProject\obj\Debug\netstandard2.1\scopedcss\bundle\" />
+</StaticWebAssets>

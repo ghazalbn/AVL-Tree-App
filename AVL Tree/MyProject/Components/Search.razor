@@ -1,0 +1,45 @@
+<RadzenTemplateForm TItem="Node" Data=@node Submit=@Find>
+    <RadzenFieldset Text="Seach For a Word">
+        <div class="row justify-content-center" style="margin-bottom:-8px;">
+            <div class="input-group">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-7">
+                            <RadzenTextBox Placeholder="type a word" style="display: block" Name="Word" @bind-Value=@node.Word />
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary" id="Vu" _bl_5cbe03e1-db98-48f9-904f-8daa0ab2b17a="">
+                                <span class="iconify" data-icon="oi:magnifying-glass" data-inline="false"></span>
+                            </button>   
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <RadzenRequiredValidator Component="Word" Text="word is required" Popup=true Style="position: absolute"/>
+    </RadzenFieldset>
+</RadzenTemplateForm>
+
+@code{
+    @* [Parameter]
+    public AVLtree aVLtree {get; set;} *@
+    private class Node
+    {
+        public string Word {get; set;}
+    }
+    Node node = new Node();
+    private void Find()
+    {
+        var e = Main.aVLtree.search(node.Word);
+        if(e != null)
+        {
+            e.Selected = true;
+            @* Task.Delay(1000); *@
+            @* e.Selected = false; *@
+            node = new Node();
+            @* Tree.Refresh(); *@
+            System.Console.WriteLine(e.Meaning);
+        }
+    }
+}

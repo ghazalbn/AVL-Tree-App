@@ -1,0 +1,32 @@
+@inject HttpClient Http
+@page "/"
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="sidebar" style="margin-right:-65px;">
+                <NavMenu />
+            </div>
+        </div>
+        <div class="col" style="margin-top:30px; margin-left:-50px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <Tree/>
+                </div>
+            </div>
+        </div>
+        <AddModal />
+        <AllWordsModal />
+        <RangeWordsModal />
+    </div>
+</div>
+
+@code{
+    public static AVLtree aVLtree;
+    protected override void OnInitialized()
+    {
+        @* var entry = new Entry("eshhh", "IIII"); *@
+        aVLtree = new AVLtree();
+        @* aVLtree.Insert(entry); *@
+    }
+}

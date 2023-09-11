@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <button type="submit" data-toggle="modal" data-target="#modal" class="rz-button btn-primary" @onclick="()=> Refresh()" id="T6Zk" _bl_5cbe03e1-db98-48f9-904f-8daa0ab2b17a="">
+      Update Tree
+    </button>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 50px;">
+    @if (size != 0)
+    {
+      <div class="tf-tree" style="direction: ltr;">
+        <ul>
+            <SubTree root=@root />
+        </ul>
+      </div>   
+    }
+  </div>
+</div>
+  
+@* <!-- Modal -->
+<div class="modal fade" id="modal" role="dialog">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" @onclick="()=>Show = false">&times;</button>
+        <h4 class="modal-title">Tree</h4>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                @if(Show)
+                {
+                  @if (size != 0)
+                  {
+                    <div class="tf-tree" style="direction: ltr;">
+                      <ul>
+                          <SubTree root=@root />
+                      </ul>
+                    </div>   
+                  } 
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" @onclick="()=>Show = false">Close</button>
+    </div>
+    </div>
+</div>
+</div> *@
+
+@code{
+  private bool Show {get; set;}
+  public AVLtree aVLTree {get; set;}
+  private Entry root {get; set;}
+  private int size {get; set;}
+  public async Task Refresh()
+  {
+    await Task.Run(()=>{ root = Main.aVLtree.GetRoot();
+    size = Main.aVLtree.GetSize();
+    Show = true;});
+  }
+
+}

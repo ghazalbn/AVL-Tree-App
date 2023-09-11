@@ -1,0 +1,52 @@
+@inject HttpClient Http
+
+<!-- Modal -->
+<div class="modal fade" id="modal1" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" @onclick="OnClose">&times;</button>
+        <h4 class="modal-title">Add a Word</h4>
+    </div>
+    <div class="modal-body">
+            <RadzenTemplateForm TItem="Entry" Data=@node Submit="() => IsSubmited = true">
+                <RadzenFieldset Text="Add a Word">
+                    <div class="container">
+                        <div class="row justify-content-center" style="margin-bottom:15px; margin-right:8px;">
+                            <div class="input-group">
+                                <RadzenTextBox Placeholder="type Word" style="display: block" Name="Word" @bind-Value=@node.Word />
+                                <RadzenTextBox Placeholder="type Meaning" style="display: block" Name="Meaning" @bind-Value=@node.Meaning />
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <RadzenButton ButtonType="ButtonType.Submit" Text="Add Word" ></RadzenButton>
+                        </div>
+                        <RadzenRequiredValidator Component="Word" Text="it is required" Popup=true Style="position: absolute"/>                   
+                    </div>
+                    <RadzenRequiredValidator Component="Meaning" Text="it is required" Popup=true Style="position: absolute"/>
+                </RadzenFieldset>
+            </RadzenTemplateForm>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" @onclick="OnClose">Close</button>
+    </div>
+    </div>
+</div>
+</div>
+@code {
+    public bool IsSubmited {get; set;}
+    @* [Parameter]
+    public AVLtree aVLtree {get; set;} *@
+    private Entry node = new Entry();
+    private void OnClose()
+    {
+        if(IsSubmited)
+        {
+            var e = Main.aVLtree.Insert(node);
+            node = new Entry();
+            IsSubmited = false;
+            System.Console.WriteLine(Main.aVLtree.Root.Word);
+            System.Console.WriteLine(Main.aVLtree.Size);
+        }
+    }
+}

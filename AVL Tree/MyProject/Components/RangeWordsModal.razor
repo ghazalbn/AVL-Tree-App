@@ -1,0 +1,88 @@
+@inject HttpClient Http
+
+<!-- Modal -->
+<div class="modal fade" id="modal2" role="dialog">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" @onclick="()=>Show = false">&times;</button>
+        <h4 class="modal-title">Show Words In Range</h4>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                @if(!Show)
+                {
+                    <RadzenTemplateForm TItem="Word" Data=@word Submit=@ShowRange>
+                        <RadzenFieldset Text="Show Words In Range">
+                            <div class="row justify-content-center" style="margin-bottom:-8px;">
+                                <div class="input-group">
+                                    <RadzenTextBox Placeholder="Start char" style="display: block" Name="First" @bind-Value=@word.first />
+
+                                    <RadzenTextBox Placeholder="End char" style="display: block" Name="Last" @bind-Value=@word.last />
+
+                                    <button type="submit" class="rz-button btn-primary" id="TVulRwc6Zk" _bl_5cbe03e1-db98-48f9-904f-8daa0ab2b17a="">
+                                        Show    
+                                    </button>   
+                                </div>
+                                <RadzenRequiredValidator Component="Last" Text="it's required" Popup=true Style="position: absolute"/>
+                            </div>
+                                <RadzenRequiredValidator Component="First" Text="it's required" Popup=true Style="position: absolute"/>
+                        </RadzenFieldset>
+                    </RadzenTemplateForm>
+                }
+                else
+                {
+                    @if (Words.Length != 0)
+                    {
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Words</th>
+                                <th>Meanings</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var word in Words)
+                                {
+                                    <tr class="warning">
+                                        <td>@word.Word</td>
+                                        <td>@word.Meaning</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No Words!</p>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" @onclick="()=>Show = false">Close</button>
+    </div>
+    </div>
+</div>
+</div>
+
+@code{
+    private bool Show {get; set;}
+    @* [Parameter]
+    public AVLtree aVLtree {get; set;} *@
+    private class Word
+    {
+        public string first {get; set;}
+        public string last {get; set;}
+    }
+    Word word = new Word();
+    private Entry[] Words = {};
+    private void ShowRange()
+    {
+        Words = Main.aVLtree.ShowWordsInRange(word.first[0], word.last[0]).ToArray();
+        word = new Word();
+        Show = true;
+    }
+}

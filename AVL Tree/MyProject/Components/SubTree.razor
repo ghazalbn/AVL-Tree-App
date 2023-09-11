@@ -1,0 +1,27 @@
+
+<li>
+    @if (root != null)
+    {
+        @if(root.Selected)
+        {
+            <span class="tf-nc" style="background-color: #f7663a;">@root.Word: @root.Meaning</span>
+        }
+        else
+        {
+            <span class="tf-nc" style="background-color: #8becec;">@root.Word: @root.Meaning</span>
+
+        }
+        @if(root.LeftChild != null || root.RightChild != null)
+        {
+            <ul>
+                <SubTree root=@root.LeftChild />
+                <SubTree root=@root.RightChild />
+            </ul>
+        }
+    }
+</li>
+
+@code{
+    [Parameter]
+    public Entry root {get; set;}
+}
